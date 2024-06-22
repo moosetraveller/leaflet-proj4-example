@@ -3,4 +3,6 @@ Example for the [StackOverflow Question](https://stackoverflow.com/questions/786
 
 > Is there a way to make Leaflet accept long/lat points assuming a spherical geometry?
 
-Example uses `leaflet` and `proj4` and shows the transformation from EPSG:4150 to EPSG:4326.
+This example uses `leaflet` and `proj4` and shows the transformation of a coordinate from EPSG:4150 to EPSG:4326.
+
+**[Demo](https://moosetraveller.github.io/leaflet-proj4-example/)**

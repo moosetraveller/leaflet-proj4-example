@@ -46,7 +46,7 @@
 
         proj4.defs('EPSG:4150', '+proj=longlat +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +no_defs');
 
-        const inputCoordinate = [47.3774613, 8.5381303];
+        const inputCoordinate = [47.3774613, 8.5381303];  // in CH1903+/EPSG:4150
         const outputCoordinate = proj4('EPSG:4150', 'EPSG:4326', inputCoordinate);
 
         pinIconMarker(inputCoordinate, {

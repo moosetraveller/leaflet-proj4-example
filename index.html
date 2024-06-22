@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Example using Proj4</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
+
+    <!-- pin marker for visualization -->
+    <script src="leaflet-pin.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="map"></div>
+
+    <script>
+        const map = L.map('map')
+            .setView([47.37682676381562, 8.538086139942175], 15);
+
+        map.attributionControl 
+            .setPrefix('<a href="https://leafletjs.com/">Leaflet</a>');
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
+            .addTo(map);
+
+        proj4.defs('EPSG:4150', '+proj=longlat +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +no_defs');
+
+        const inputCoordinate = [47.3774613, 8.5381303];
+        const outputCoordinate = proj4('EPSG:4150', 'EPSG:4326', inputCoordinate);
+
+        pinIconMarker(inputCoordinate, {
+            color: '#cd5b45'
+        })
+            .addTo(map)
+            .bindPopup(`
+                <div style="text-align: center;">
+                    Location (${inputCoordinate.join(', ')}) in <b>EPSG:4150</b> 
+                    displayed without previous transformation.<br/><br/>
+                    Wrong location as the location is expected to be
+                    on the Lindenhof platform.
+                </div>`, {
+                autoClose: false,
+                closeOnClick: false,
+                keepInView: true,
+            })
+            .openPopup();
+
+        pinIconMarker(outputCoordinate, {
+            color: '#9066ee',
+        })
+            .addTo(map)
+            .bindPopup(`
+                <div style="text-align: center;">
+                    Location transformed to <b>EPSG:4326</b>. 
+                    Resulting coordinate: ${outputCoordinate.join(', ')}
+                </div>`, {
+                autoClose: false,
+                closeOnClick: false,
+                keepInView: true,
+            })
+            .openPopup();
+    </script>
+
+</body>
+</html>

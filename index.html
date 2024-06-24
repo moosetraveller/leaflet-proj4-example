@@ -49,7 +49,7 @@
         const inputCoordinate = [47.3774613, 8.5381303];  // in CH1903+/EPSG:4150
         const outputCoordinate = proj4('EPSG:4150', 'EPSG:4326', inputCoordinate);
 
-        pinIconMarker(inputCoordinate, {
+        L.pinIconMarker(inputCoordinate, {
             color: '#cd5b45'
         })
             .addTo(map)
@@ -66,7 +66,7 @@
             })
             .openPopup();
 
-        pinIconMarker(outputCoordinate, {
+        L.pinIconMarker(outputCoordinate, {
             color: '#9066ee',
         })
             .addTo(map)

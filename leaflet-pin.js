@@ -52,7 +52,7 @@ L.PinIcon = L.DivIcon.extend({
 
 });
 
-function pinIcon(options) {
+L.pinIcon = function (options) {
     return new L.PinIcon(options);
 }
 
@@ -61,7 +61,7 @@ L.PinIconMarker = L.Marker.extend({
     initialize: function(latlng, options) {
 
         options = options || {};
-        options.icon = pinIcon({ color: options.color });
+        options.icon = L.pinIcon({ color: options.color });
 
         L.Marker.prototype.initialize.call(this, latlng, options);
 
@@ -90,7 +90,7 @@ L.PinIconMarker = L.Marker.extend({
 
 });
 
-function pinIconMarker(latlng, options) {
+L.pinIconMarker = function (latlng, options) {
     return new L.PinIconMarker(latlng, options);
 }
 
